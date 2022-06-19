@@ -1,38 +1,207 @@
-.App {
+.App-Header {
+  margin-left: 5%;
+  margin-right: 5%;
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.App-Container {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+  padding: 10px;
+  font-family: sans-serif;
+}
+
+.App-Container-Login {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  border: 2px solid #d9d9d9;
+  padding: 25px;
+  width: 40%;
+}
+
+.App-Text-1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App-Text-2 {
+  font-size: 18px;
+  text-align: center;
+  padding-top: 0.25em;
+  padding-bottom: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.App-Text-3 {
+  font-size: 18px;
+  padding: 0.5em;
+}
+
+.App-Text-4 {
+  font-size: 16px;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+
+.App-Link {
+  float: right;
+  font-size: small;
+  padding-right: 10px;
+}
+
+.App-Link a {
+  text-decoration: none;
+}
+
+.App-Button-Action {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.App-Button {
+  background-color: #884dff;
+  border-color: #7733ff;
+  font-size: 16px;
+  color: #fff;
+  width: 9em;
+  padding: 0.75em;
+  border-radius: 5px;
+  margin-left: 1%;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+
+.App-Button-Login {
+  background-color: #884dff;
+  border-color: #7733ff;
+  font-size: 16px;
+  color: #fff;
+  width: 17em;
+  padding: 0.75em;
+  border-radius: 5px;
+  margin-left: 1%;
+  cursor: pointer;
+  transition: background-color 1s;
+}
+
+.App-Button:hover {
+  background-color: #b366ff;
+}
+
+button:disabled {
+  background-color: #f2e6ff;
+  border-color: #f2e6ff;
+  box-shadow: none;
+  transition: none;
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+button:disabled:hover {
+  background-color: #f2e6ff;
+}
+
+.App-Input {
+  width: 15em;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-left: 5px;
+}
+
+.App-Input-Error {
+  border: 2px solid red !important;
+}
+
+.App-Border {
+  border: 2px solid #d9d9d9;
+  padding: 0.75em;
+}
+
+.App-Border th, td {
+  border: 2px solid #d9d9d9;
+  padding: 0.75em;
+}
+
+.App-Table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.App-Grid {
+  display: grid;
+  grid-template-columns: 5% 45% 45% 5%;
+  grid-template-rows: 60px auto 0.25em;
+  text-align: right;
+  width: 85%;
+}
+
+.App-Grid-Login {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  grid-template-rows: 60px 55px 5em;
+}
+
+.App-Content-Right {
+  float: right;
+  margin-top: 25px;
+}
+
+.App-Content-Center {
+  padding-top: 3%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.App-Center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding-left: 5px;
+}
+
+.App-Center button {
+  margin: 5px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  input[type='range'] {
+    overflow: hidden;
+    width: 60%;
+    -webkit-appearance: none;
+    background-color: #d9d9d9;
+    margin: 10px 0;
+  }
+  
+  input[type='range']::-webkit-slider-runnable-track {
+    height: 12px;
+    -webkit-appearance: none;
+    color: #b366ff;
+    border-radius: 5px;
+  }
+  
+  input[type='range']::-webkit-slider-thumb {
+    width: 15px;
+    height: 25px;
+    -webkit-appearance: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background: #884dff;
+    box-shadow: -200px 0 0 200px #b366ff;
+    border: 1px solid #884dff;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+input[type="range"]::-moz-range-progress {
+  background-color: #884dff; 
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+input[type="range"]::-moz-range-track {  
+  background-color: #d9d9d9;
 }
