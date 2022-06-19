@@ -4,7 +4,6 @@ import React from "react";
 const Header = () => {
     const onLogout = async () => {
         localStorage.removeItem("user");
-        localStorage.removeItem("pokemons");
         window.location.reload();
     }
 

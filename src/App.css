@@ -1,3 +1,11 @@
+.App-Loading {
+  text-align: center;
+  font-size: 24px;
+  color: #106b28;
+  border: 2px solid #106b28;
+  border-radius: 5px;
+}
+
 .App-Header {
   margin-left: 5%;
   margin-right: 5%;
