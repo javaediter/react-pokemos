@@ -1,16 +1,14 @@
 import "../App.css";
 import React, { useEffect, useState } from "react";
+import pokemonService from "../services/pokemonService";
 
 const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
     const [list, setList] = useState([]);
 
     const search = async (value) => {
-        if(!value || value === ''){
-            setList(pokemons);
-        }else{
-            let searched = pokemons.filter(o => o.nombre.toLowerCase().includes(value.toLowerCase()));
-            setList(searched);
-        }        
+        pokemonService.buscarPokemons(value)
+        .then(response => response.json())
+        .then(data => setList(data));
     }
 
     useEffect(() => {
@@ -41,7 +39,7 @@ const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
                             <tr key={index}>
                                 <td>{o.nombre}</td>
                                 <td className="App-Center">
-                                    <img src={o.imagen} alt="" />
+                                    <img src={require('../images/pokemon.png')} alt={o.imagen} width="24px" height="32px" />
                                 </td>
                                 <td>{o.ataque}</td>
                                 <td>{o.defensa}</td>
@@ -49,7 +47,7 @@ const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
                                     <button className="App-Button-Action" type="button" onClick={() => selectPokemon(o)}>
                                         <img src={require('../images/edit.png')} alt="" width="21px" height="24px" />
                                     </button>
-                                    <button className="App-Button-Action" type="button" onClick={() => deletePokemon(o.nombre)}>
+                                    <button className="App-Button-Action" type="button" onClick={() => deletePokemon(o)}>
                                     <img src={require('../images/delete.png')} alt="" width="21px" height="24px" />
                                     </button>
                                 </td>

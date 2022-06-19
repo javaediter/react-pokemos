@@ -6,7 +6,7 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
     const [imagen, setImagen] = useState("http://");
     const [ataque, setAtaque] = useState(50);
     const [defensa, setDefensa] = useState(50);
-    const [isUpdate, setIsUpdate] = useState(false);
+    const [id, setId] = useState(0);
     const [disableButton, setDisabledButton] = useState(true);
 
     const cleanForm = async () => {
@@ -14,7 +14,7 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
         setImagen("http://");
         setAtaque(50);
         setDefensa(50);
-        setIsUpdate(false);
+        setId(0);
     }
 
     const onChangeValue = async (e) => {
@@ -41,7 +41,7 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
             imagen: imagen,
             ataque: ataque,
             defensa: defensa,
-            isUpdate: isUpdate
+            id: id
         });
         
         let form = e.target;
@@ -80,7 +80,7 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
             setImagen(pokemonSelected.imagen);
             setAtaque(pokemonSelected.ataque);
             setDefensa(pokemonSelected.defensa);
-            setIsUpdate(pokemonSelected.isUpdate);
+            setId(pokemonSelected.id);
         }
         setDisabledButton(disabledButtonGuardar);
     }, [pokemonSelected, disabledButtonGuardar]);
@@ -118,7 +118,7 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
                             <span>100</span>                            
                         </div>
                         <div>
-                            <input type="hidden" name="isUpdate" value={isUpdate} />
+                            <input type="hidden" name="isUpdate" value={id} />
                         </div>
                     </div>                
                 </div>            
