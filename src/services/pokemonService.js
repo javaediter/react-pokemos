@@ -1,5 +1,4 @@
-//const API_ENDPOINT = "http://localhost:8080/pokemons";
-const API_ENDPOINT = "https://editer-pokemons.herokuapp.com/pokemons"
+const API_ENDPOINT=process.env.REACT_APP_API_ENDPOINT;
 
 const pokemonService = {
     getPokemons: async () => {
