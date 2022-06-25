@@ -179,6 +179,16 @@ button:disabled:hover {
   margin: 5px;
 }
 
+.App-Img {
+  width: 24px;
+  height: 32px;
+}
+
+.App-Img-Action {
+  width: 21px;
+  height: 24px;
+}
+
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   input[type='range'] {
     overflow: hidden;

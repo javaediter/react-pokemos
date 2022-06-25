@@ -1,14 +1,22 @@
 import "../App.css";
 import React, { useEffect, useState } from "react";
 import pokemonService from "../services/pokemonService";
+import Row from "./Row";
 
 const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
     const [list, setList] = useState([]);
 
     const search = async (value) => {
+        
         pokemonService.buscarPokemons(value)
         .then(response => response.json())
         .then(data => setList(data));
+        
+
+        /*
+        let listaFiltrada = pokemons.filter(o => o.nombre.toLowerCase().includes(value.toLowerCase()));
+        setList(listaFiltrada);
+        */
     }
 
     useEffect(() => {
@@ -33,26 +41,9 @@ const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
                 </thead>
                 <tbody>
                     {
-                        list.map((o, index) => {
+                        list.map(o => {
                             o.isUpdate = true;
-                            return (
-                            <tr key={index}>
-                                <td>{o.nombre}</td>
-                                <td className="App-Center">
-                                    <img src={require('../images/pokemon.png')} alt={o.imagen} width="24px" height="32px" />
-                                </td>
-                                <td>{o.ataque}</td>
-                                <td>{o.defensa}</td>
-                                <td className="App-Center">
-                                    <button className="App-Button-Action" type="button" onClick={() => selectPokemon(o)}>
-                                        <img src={require('../images/edit.png')} alt="" width="21px" height="24px" />
-                                    </button>
-                                    <button className="App-Button-Action" type="button" onClick={() => deletePokemon(o)}>
-                                    <img src={require('../images/delete.png')} alt="" width="21px" height="24px" />
-                                    </button>
-                                </td>
-                            </tr>
-                            )
+                            return (<Row data={o} select={selectPokemon} quit={deletePokemon} />)
                         })
                     }
                 </tbody>
