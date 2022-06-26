@@ -2,31 +2,18 @@ import "../App.css";
 import React, { useEffect, useState } from "react";
 
 const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
-    const [nombre, setNombre] = useState("");
-    const [imagen, setImagen] = useState("http://");
-    const [ataque, setAtaque] = useState(50);
-    const [defensa, setDefensa] = useState(50);
-    const [id, setId] = useState(0);
+    const nuevo = {
+        nombre: '',
+        imagen: '',
+        ataque: 50,
+        defensa: 50,
+        id: 0
+    };
     const [disableButton, setDisabledButton] = useState(true);
+    const [values, setValues] = useState(nuevo);
 
-    const cleanForm = async () => {
-        setNombre("");
-        setImagen("http://");
-        setAtaque(50);
-        setDefensa(50);
-        setId(0);
-    }
-
-    const onChangeValue = async (e) => {
-        if(e.target.name==="nombre"){
-            setNombre(e.target.value);
-        }else if(e.target.name==="imagen"){
-            setImagen(e.target.value);
-        }else if(e.target.name==="ataque"){
-            setAtaque(e.target.value);
-        }else{
-            setDefensa(e.target.value);
-        }
+    const handleChange = ({ target: { name, value }}) => {
+        setValues({...values, [name]: value});
     }
 
     const saveData = async (e) => {
@@ -36,16 +23,9 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
             return;
         }
 
-        savePokemon({
-            nombre: nombre,
-            imagen: imagen,
-            ataque: ataque,
-            defensa: defensa,
-            id: id
-        });
-        
-        let form = e.target;
-        form.reset();
+        savePokemon(values);
+        setValues(nuevo);
+        e.target.reset();
         await cancel();
     }
 
@@ -71,16 +51,11 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
 
     const cancel = async () => {
         setDisabledButton(true);
-        await cleanForm();
     }
 
     useEffect(() => {
         if(pokemonSelected && pokemonSelected.isUpdate !== undefined && pokemonSelected.isUpdate){
-            setNombre(pokemonSelected.nombre);
-            setImagen(pokemonSelected.imagen);
-            setAtaque(pokemonSelected.ataque);
-            setDefensa(pokemonSelected.defensa);
-            setId(pokemonSelected.id);
+            setValues(pokemonSelected);
         }
         setDisabledButton(disabledButtonGuardar);
     }, [pokemonSelected, disabledButtonGuardar]);
@@ -97,28 +72,28 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
                         <div></div>
                         <div>
                             <label>Nombre:</label>
-                            <input type="text" className="App-Input App-Border" name="nombre" value={nombre} onChange={onChangeValue} />
+                            <input type="text" className="App-Input App-Border" name="nombre" value={values.nombre} onChange={handleChange} />
                         </div>
                         <div>                            
                             <label>Ataque:</label>&nbsp;&nbsp;
                             <span>0</span>
-                            <input type="range" min="0" max="100" className="App-Range" name="ataque" value={ataque} onChange={onChangeValue}/>
+                            <input type="range" min="0" max="100" className="App-Range" name="ataque" value={values.ataque} onChange={handleChange}/>
                             <span>100</span>                            
                         </div>
                         <div></div>
                         <div></div>
                         <div>
                             <label>Imagen:</label>
-                            <input type="url" placeholder="url" className="App-Input App-Border" name="imagen" value={imagen} onChange={onChangeValue}/>
+                            <input type="url" placeholder="url" className="App-Input App-Border" name="imagen" value={values.imagen} onChange={handleChange}/>
                         </div>
                         <div>                            
                             <label>Defansa:</label>&nbsp;&nbsp;
                             <span>0</span>
-                            <input type="range" min="0" max="100" className="App-Range" name="defensa" value={defensa} onChange={onChangeValue}/>
+                            <input type="range" min="0" max="100" className="App-Range" name="defensa" value={values.defensa} onChange={handleChange}/>
                             <span>100</span>                            
                         </div>
                         <div>
-                            <input type="hidden" name="isUpdate" value={id} />
+                            <input type="hidden" name="id" value={values.id} />
                         </div>
                     </div>                
                 </div>            

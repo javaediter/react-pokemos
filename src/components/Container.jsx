@@ -1,14 +1,13 @@
 import React from "react";
 import Table from "./Table";
 import Form from "./Form";
+import ButtonNew from "./ButtonNew";
 
-const Container = ({ onNewPokemon, pokemons, selectPokemon, deletePokemon, disabledButtonGuardar, pokemonSelected, savePokemon }) => {
+const Container = ({ handleNewData, pokemons, selectPokemon, deletePokemon, disabledButtonGuardar, pokemonSelected, savePokemon }) => {
 
     return(
         <div className="App-Container">
-            <div className="App-Content-Right">
-                <button type="button" className="App-Button" onClick={onNewPokemon}>Nuevo</button>
-            </div>        
+            <ButtonNew handleNewData={handleNewData} />        
             
             <Table pokemons={pokemons} selectPokemon={selectPokemon} deletePokemon={deletePokemon} />
         

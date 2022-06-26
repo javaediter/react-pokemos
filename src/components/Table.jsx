@@ -1,21 +1,10 @@
 import "../App.css";
 import React, { useEffect, useState } from "react";
-import pokemonService from "../services/pokemonService";
 import Row from "./Row";
+import Search from "./Search";
 
 const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
     const [list, setList] = useState([]);
-
-    const search = async (value) => {        
-        pokemonService.buscarPokemons(value)
-        .then(response => response.json())
-        .then(data => setList(data));        
-
-        /*
-        let listaFiltrada = pokemons.filter(o => o.nombre.toLowerCase().includes(value.toLowerCase()));
-        setList(listaFiltrada);
-        */
-    }
 
     useEffect(() => {
         setList(pokemons);        
@@ -23,10 +12,7 @@ const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
 
     return (
         <div className="App-Text-4">
-            <label className="App-Text-3">Listado de Pokemos</label>
-            <div className="App-Content-Left">                
-                <input type="text" placeholder="Buscar" className="App-Input App-Border" onKeyUp={(e) => search(e.target.value)}/>
-            </div>
+            <Search handleList={setList} />
             <table className="App-Border App-Table">
                 <thead className="App-Text-2">
                     <tr>
@@ -41,7 +27,7 @@ const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
                     {
                         list.map(o => {
                             o.isUpdate = true;
-                            return (<Row data={o} select={selectPokemon} quit={deletePokemon} />)
+                            return (<Row key={o.id} data={o} select={selectPokemon} quit={deletePokemon} />)
                         })
                     }
                 </tbody>

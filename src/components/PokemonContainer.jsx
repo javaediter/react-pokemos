@@ -10,17 +10,6 @@ const PokemonContainer = () => {
     const [pokemons, setPokemons] = useState([]);
     const [pokemonSelected, setPokemonSelected] = useState({});
 
-    const onNewPokemon = async () => {
-        setDisabledButtonGuardar(false);
-        setPokemonSelected({
-            id: 0,
-            nombre: "",
-            imagen: "http://",
-            ataque: 50,
-            defensa: 50
-        });
-    }
-
     const selectPokemon = async (pokemon) => {
         setPokemonSelected(pokemon); 
         setDisabledButtonGuardar(false);       
@@ -55,7 +44,7 @@ const PokemonContainer = () => {
     return (
         loading?
         <Container 
-        onNewPokemon={onNewPokemon}
+        handleNewData={setDisabledButtonGuardar}
         pokemons={pokemons} 
         selectPokemon={selectPokemon} 
         deletePokemon={deletePokemon} 
