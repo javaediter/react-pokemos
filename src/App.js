@@ -1,6 +1,6 @@
-import Container from './components/Container';
-import Header from './components/Header';
-import Login from './components/Login';
+import PokemonContainer from './components/PokemonContainer';
+import HeaderContainer from './components/HeaderContainer';
+import LoginContainer from './components/LoginContainer';
 import React, { useEffect, useState } from 'react';
 
 function App() {
@@ -21,12 +21,12 @@ function App() {
   return (
     authenticated?
     <> 
-      <Header />    
-      <Container />
+      <HeaderContainer />    
+      <PokemonContainer />
     </>
     :
     <>
-      <Login handleAuthentication={handleAuthentication}/>
+      <LoginContainer handleAuthentication={handleAuthentication}/>
     </>
   );
 }

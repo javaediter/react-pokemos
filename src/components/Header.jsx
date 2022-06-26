@@ -1,13 +1,7 @@
-import "../App.css";
 import React from "react";
 
-const Header = () => {
-    const onLogout = async () => {
-        localStorage.removeItem("user");
-        window.location.reload();
-    }
-
-    return (
+const Header = ({ onLogout }) => {
+    return(
         <div className="App-Header">
             <p className="App-Text-1">
                 <label>Bienvenido {localStorage.getItem("user").toLocaleUpperCase()}</label>

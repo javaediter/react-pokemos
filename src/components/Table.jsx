@@ -6,12 +6,10 @@ import Row from "./Row";
 const Table = ({ pokemons, selectPokemon, deletePokemon }) => {
     const [list, setList] = useState([]);
 
-    const search = async (value) => {
-        
+    const search = async (value) => {        
         pokemonService.buscarPokemons(value)
         .then(response => response.json())
-        .then(data => setList(data));
-        
+        .then(data => setList(data));        
 
         /*
         let listaFiltrada = pokemons.filter(o => o.nombre.toLowerCase().includes(value.toLowerCase()));

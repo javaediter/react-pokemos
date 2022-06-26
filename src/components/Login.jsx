@@ -1,22 +1,8 @@
-import "../App.css";
-import React, { useState } from "react";
+import React from "react";
+import '../App.css';
 
-const Login = ({ handleAuthentication }) => {
-    const [user, setUser] = useState("");
-
-    const onChange = async (value) => {
-        setUser(value);
-    }
-
-    const onLogin = async () => {
-        if(user && user !== ''){
-            handleAuthentication(user);
-        }else{
-            alert('Usuario es requerido');
-        }        
-    }
-
-    return (
+const Login = ({ onChange, onLogin}) => {
+    return(
         <div className="App-Container-Login">            
             <div className="App-Grid-Login">
                 <div></div>
