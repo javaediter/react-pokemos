@@ -1,7 +1,8 @@
 import "../App.css";
 import React, { useEffect, useState } from "react";
+import pokemonService from "../services/pokemonService";
 
-const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
+const Form = ({ pokemonSelected, reloadData }) => {
     const nuevo = {
         nombre: '',
         imagen: '',
@@ -16,17 +17,23 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
         setValues({...values, [name]: value});
     }
 
-    const saveData = async (e) => {
+    const save = async (e) => {    
         e.preventDefault();
 
         if(await validateData(e)){
             return;
         }
 
-        savePokemon(values);
-        setValues(nuevo);
-        e.target.reset();
-        await cancel();
+        if(values.id > 0){
+            //pokemonService.putPokemon(values).then(() => reloadData());
+            await pokemonService.putPokemon(values);
+        }else{            
+            //pokemonService.postPokemon(values).then(() => reloadData());
+            await pokemonService.postPokemon(values);
+        }
+
+        await cancel(e);
+        await reloadData();        
     }
 
     const validateData = async (e) => {
@@ -49,16 +56,18 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
         return emptyData;
     }
 
-    const cancel = async () => {
+    const cancel = async (e) => {
+        setValues(nuevo);
+        e.target.reset();
         setDisabledButton(true);
     }
 
     useEffect(() => {
         if(pokemonSelected && pokemonSelected.isUpdate !== undefined && pokemonSelected.isUpdate){
             setValues(pokemonSelected);
-        }
-        setDisabledButton(disabledButtonGuardar);
-    }, [pokemonSelected, disabledButtonGuardar]);
+            setDisabledButton(false);
+        }        
+    }, [pokemonSelected]);
 
     return (
         <div className="App-Border">
@@ -66,7 +75,7 @@ const Form = ({ disabledButtonGuardar, pokemonSelected, savePokemon }) => {
                 <label>Nuevo Pokemon</label>
             </div>
 
-            <form id="form" onSubmit={saveData}>
+            <form id="form" onSubmit={save}>
                 <div className="App-Text-4">                    
                     <div className="App-Grid">
                         <div></div>

@@ -6,29 +6,7 @@ import Loading from "./Loading";
 
 const PokemonContainer = () => {
     const [loading, setLoading] = useState(false);
-    const [disabledButtonGuardar, setDisabledButtonGuardar] = useState(true);
     const [pokemons, setPokemons] = useState([]);
-    const [pokemonSelected, setPokemonSelected] = useState({});
-
-    const selectPokemon = async (pokemon) => {
-        setPokemonSelected(pokemon); 
-        setDisabledButtonGuardar(false);       
-    }
-
-    const savePokemon = async (data) => {     
-        if(data.id > 0){
-            pokemonService.putPokemon(data).then(() => loadData());
-        }else{            
-            pokemonService.postPokemon(data).then(() => loadData());
-        }
-    }
-
-    const deletePokemon = async (pokemon) => {
-        let ok = window.confirm("Desea eliminar el pokemon " + pokemon.nombre);
-        if(ok){
-            pokemonService.deletePokemon(pokemon.id).then(() => loadData());
-        }        
-    }
 
     const loadData = async () => {
         pokemonService.getPokemons()
@@ -42,17 +20,7 @@ const PokemonContainer = () => {
     }, []);
 
     return (
-        loading?
-        <Container 
-        handleNewData={setDisabledButtonGuardar}
-        pokemons={pokemons} 
-        selectPokemon={selectPokemon} 
-        deletePokemon={deletePokemon} 
-        disabledButtonGuardar={disabledButtonGuardar} 
-        pokemonSelected={pokemonSelected} 
-        savePokemon={savePokemon} />
-        :
-        <Loading />
+        loading?<Container pokemons={pokemons} reloadData={loadData} />:<Loading />
     )
 };
 
