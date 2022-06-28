@@ -4,14 +4,14 @@ import Row from "./Row";
 import Search from "./Search";
 import pokemonService from "../services/pokemonService";
 
-const Table = ({ pokemons, selectPokemon, reloadData }) => {
+const Table = ({ pokemons, selectPokemon, handleAction }) => {
     const [list, setList] = useState([]);
 
     const deletePokemon = async (pokemon) => {
         let ok = window.confirm("Desea eliminar el pokemon " + pokemon.nombre);
         if(ok){
             await pokemonService.deletePokemon(pokemon.id);
-            await reloadData();
+            await handleAction('delete');
         }        
     }
 

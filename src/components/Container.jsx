@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "./Table";
 import Form from "./Form";
 import ButtonNew from "./ButtonNew";
 
-const Container = ({ pokemons, reloadData }) => {
+const Container = ({ pokemons, handleAction }) => {
     const [pokemonSelected, setPokemonSelected] = useState({});
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        setList(pokemons);
+    }, [pokemons]);
 
     return(
         <div className="App-Container">
             <ButtonNew handleNewData={setPokemonSelected} />        
             
-            <Table pokemons={pokemons} selectPokemon={setPokemonSelected} reloadData={reloadData} />
+            <Table pokemons={list} selectPokemon={setPokemonSelected} handleAction={handleAction} />
         
-            <Form pokemonSelected={pokemonSelected} reloadData={reloadData} />
+            <Form pokemonSelected={pokemonSelected} handleAction={handleAction} />
         </div>
     );
 };

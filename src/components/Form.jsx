@@ -2,7 +2,7 @@ import "../App.css";
 import React, { useEffect, useState } from "react";
 import pokemonService from "../services/pokemonService";
 
-const Form = ({ pokemonSelected, reloadData }) => {
+const Form = ({ pokemonSelected, handleAction }) => {
     const nuevo = {
         nombre: '',
         imagen: '',
@@ -27,13 +27,14 @@ const Form = ({ pokemonSelected, reloadData }) => {
         if(values.id > 0){
             //pokemonService.putPokemon(values).then(() => reloadData());
             await pokemonService.putPokemon(values);
+            await cancel(e);
+            await handleAction('update');
         }else{            
             //pokemonService.postPokemon(values).then(() => reloadData());
             await pokemonService.postPokemon(values);
-        }
-
-        await cancel(e);
-        await reloadData();        
+            await cancel(e);
+            await handleAction('save');
+        }        
     }
 
     const validateData = async (e) => {
